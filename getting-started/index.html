@@ -11,7 +11,7 @@
     <link rel="../img/favicon.ico">
 
     
-    <title>Community - Apache Iceberg (incubating)</title>
+    <title>Getting started - Apache Iceberg (incubating)</title>
     
 
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -77,8 +77,8 @@
                 
                 
                 
-                    <li class="active">
-                        <a href="./">Community</a>
+                    <li >
+                        <a href="../community/">Community</a>
                     </li>
                 
                 
@@ -117,16 +117,6 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="..">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="next" href="../partitioning/">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
             </ul>
         </div>
     </div>
@@ -137,72 +127,12 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#welcome">Welcome!</a></li>
-            <li class="second-level"><a href="#issues">Issues</a></li>
-                
-            <li class="second-level"><a href="#contributing">Contributing</a></li>
-                
-            <li class="second-level"><a href="#mailing-lists">Mailing Lists</a></li>
-                
+        <li class="first-level active"><a href="#getting-started">Getting Started</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<!--
-  - Licensed to the Apache Software Foundation (ASF) under one
-  - or more contributor license agreements.  See the NOTICE file
-  - distributed with this work for additional information
-  - regarding copyright ownership.  The ASF licenses this file
-  - to you under the Apache License, Version 2.0 (the
-  - "License"); you may not use this file except in compliance
-  - with the License.  You may obtain a copy of the License at
-  -
-  -   http://www.apache.org/licenses/LICENSE-2.0
-  -
-  - Unless required by applicable law or agreed to in writing,
-  - software distributed under the License is distributed on an
-  - "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  - KIND, either express or implied.  See the License for the
-  - specific language governing permissions and limitations
-  - under the License.
-  -->
-
-<h2 id="welcome">Welcome!</h2>
-<p>Apache Iceberg tracks issues in GitHub and prefers to receive contributions as pull requests.</p>
-<p>Community discussions happen primarily on the dev mailing list or on specific issues.</p>
-<h3 id="issues">Issues</h3>
-<p>Issues are tracked in GitHub:</p>
-<ul>
-<li><a href="https://github.com/apache/incubator-iceberg/issues">View open issues</a></li>
-<li><a href="https://github.com/apache/incubator-iceberg/issues/new">Open a new issue</a></li>
-</ul>
-<h3 id="contributing">Contributing</h3>
-<p>Iceberg uses Apache&rsquo;s GitHub integration. The code is available at <a href="https://github.com/apache/incubator-iceberg">https://github.com/apache/incubator-iceberg</a></p>
-<p>The Iceberg community prefers to receive contributions as <a href="https://help.github.com/articles/about-pull-requests/">Github pull requests</a>.</p>
-<ul>
-<li><a href="https://github.com/apache/incubator-iceberg/pulls">View open pull requests</a></li>
-<li><a href="https://help.github.com/articles/about-pull-requests/">Learn about pull requests</a></li>
-</ul>
-<h3 id="mailing-lists">Mailing Lists</h3>
-<p>Iceberg has three mailing lists:</p>
-<ul>
-<li><strong>Developers</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#101;&#118;&#64;&#105;&#99;&#101;&#98;&#101;&#114;&#103;&#46;&#97;&#112;&#97;&#99;&#104;&#101;&#46;&#111;&#114;&#103;">&#100;&#101;&#118;&#64;&#105;&#99;&#101;&#98;&#101;&#114;&#103;&#46;&#97;&#112;&#97;&#99;&#104;&#101;&#46;&#111;&#114;&#103;</a> &ndash; used for community discussions<ul>
-<li><a href="mailto:dev-subscribe@iceberg.apache.org">Subscribe</a></li>
-<li><a href="mailto:dev-unsubscribe@iceberg.apache.org">Unsubscribe</a></li>
-<li><a href="https://lists.apache.org/list.html?dev@iceberg.apache.org">Archive</a></li>
-</ul>
-</li>
-<li><strong>Commits</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#109;&#109;&#105;&#116;&#115;&#64;&#105;&#99;&#101;&#98;&#101;&#114;&#103;&#46;&#97;&#112;&#97;&#99;&#104;&#101;&#46;&#111;&#114;&#103;">&#99;&#111;&#109;&#109;&#105;&#116;&#115;&#64;&#105;&#99;&#101;&#98;&#101;&#114;&#103;&#46;&#97;&#112;&#97;&#99;&#104;&#101;&#46;&#111;&#114;&#103;</a> &ndash; distributes commit notifications<ul>
-<li><a href="mailto:commits-subscribe@iceberg.apache.org">Subscribe</a></li>
-<li><a href="mailto:commits-unsubscribe@iceberg.apache.org">Unsubscribe</a></li>
-<li><a href="https://lists.apache.org/list.html?commits@iceberg.apache.org">Archive</a></li>
-</ul>
-</li>
-<li><strong>Private</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#112;&#114;&#105;&#118;&#97;&#116;&#101;&#64;&#105;&#99;&#101;&#98;&#101;&#114;&#103;&#46;&#97;&#112;&#97;&#99;&#104;&#101;&#46;&#111;&#114;&#103;">&#112;&#114;&#105;&#118;&#97;&#116;&#101;&#64;&#105;&#99;&#101;&#98;&#101;&#114;&#103;&#46;&#97;&#112;&#97;&#99;&#104;&#101;&#46;&#111;&#114;&#103;</a> &ndash; private PMC list for committer nominations<ul>
-<li><a href="https://lists.apache.org/list.html?private@iceberg.apache.org">Archive</a></li>
-</ul>
-</li>
-</ul></div>
+<h2 id="getting-started">Getting Started</h2></div>
         
         
     </div>
