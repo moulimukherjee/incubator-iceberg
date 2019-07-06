@@ -84,8 +84,14 @@
                 
                 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User docs <b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="schemas/">Schemas</a>
+</li>
+
                         
                             
 <li >
@@ -95,7 +101,112 @@
                         
                             
 <li >
+    <a href="configuration/">Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="performance/">Performance</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="reliability/">Reliability</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="evolution/">Table evolution</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="spark#time-travel">Time travel</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="api-quickstart/">Quickstart</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="spark/">Spark</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="presto/">Presto</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="https://github.com/apache/incubator-iceberg">Git Repo</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="api-quickstart/">Quickstart</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="api/">API intro</a>
+</li>
+
+                        
+                            
+<li >
     <a href="/javadoc/">Javadoc</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="https://github.com/apache/incubator-iceberg/tree/master/python">Git Repo</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Format <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="terms/">Definitions</a>
 </li>
 
                         
@@ -109,14 +220,15 @@
                     </li>
                 
                 
+                
+                    <li >
+                        <a href="https://github.com/apache/incubator-iceberg">Iceberg on GitHub</a>
+                    </li>
+                
+                
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                            <i class="fas fa-search"></i> Search
-                        </a>
-                    </li>
                     <li class="disabled">
                         <a rel="prev" >
                             <i class="fas fa-arrow-left"></i> Previous
@@ -137,10 +249,9 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#iceberg-overview">Iceberg Overview</a></li>
-        <li class="first-level "><a href="#design-benefits">Design benefits</a></li>
-        <li class="first-level "><a href="#why-a-new-table-format">Why a new table format?</a></li>
-        <li class="first-level "><a href="#other-design-goals">Other design goals</a></li>
+        <li class="first-level active"><a href="#user-experience">User experience</a></li>
+        <li class="first-level "><a href="#reliability-and-performance">Reliability and performance</a></li>
+        <li class="first-level "><a href="#open-standard">Open standard</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -164,45 +275,32 @@
   - under the License.
   -->
 
-<p><img alt="" src="img/Iceberg-logo.png" /></p>
-<p><strong>Apache Iceberg is a new table format for large, slow-moving tabular data.</strong> It is designed to improve on the de-facto standard table layout built into Hive, Presto, and Spark.</p>
-<h3 id="iceberg-overview">Iceberg Overview</h3>
-<p>Iceberg tracks individual data files in a table instead of directories. This allows writers to create data files in-place and only adds files to the table in an explicit commit.</p>
-<p>Table state is maintained in metadata files. All changes to table state create a new metadata file and replace the old metadata with an atomic operation. The table metadata file tracks the table schema, partitioning config, other properties, and snapshots of the table contents.</p>
-<p>The atomic transitions from one table metadata file to the next provide snapshot isolation. Readers use the latest table state (snapshot) that was current when they load the table metadata and are not affected by changes until they refresh and pick up a new metadata location.</p>
-<p>A <em>snapshot</em> is a complete set of data files in the table at some point in time. Snapshots are listed in the metadata file, but the files in a snapshot are stored across a separate set of <em>manifest</em> files.</p>
-<p>Data files in snapshots are stored in one or more manifest files that contain a row for each data file in the table, its partition data, and its metrics. A snapshot is the union of all files in its manifests. Manifest files can be shared between snapshots to avoid rewriting metadata that is slow-changing.</p>
-<h3 id="design-benefits">Design benefits</h3>
-<p>This design addresses specific problems with the hive layout: file listing is no longer used to plan jobs and files are created in place without renaming.</p>
-<p>This also provides improved guarantees and performance:</p>
+<h1 id="_1"><img alt="Iceberg" src="img/Iceberg-logo.png" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>Apache Iceberg is an open table format for huge analytic datasets.</strong> Iceberg adds tables to Presto and Spark that use a high-performance format that works just like a SQL table.</p>
+<h3 id="user-experience">User experience<a class="headerlink" href="#user-experience" title="Permanent link">&para;</a></h3>
+<p>Iceberg avoids unpleasant surprises. Schema evolution works and won&rsquo;t inadvertently un-delete data. Users don&rsquo;t need to know about partitioning to get fast queries.</p>
 <ul>
-<li><strong>Snapshot isolation</strong>: Readers always use a consistent snapshot of the table, without needing to hold a lock. All table updates are atomic.</li>
-<li><strong>O(1) RPCs to plan</strong>: Instead of listing O(n) directories in a table to plan a job, reading a snapshot requires O(1) RPC calls.</li>
-<li><strong>Distributed planning</strong>: File pruning and predicate push-down is distributed to jobs, removing the metastore as a bottleneck.</li>
-<li><strong>Version history and rollback</strong>: Table snapshots are kept as history and tables can roll back if a job produces bad data.</li>
-<li><strong>Finer granularity partitioning</strong>: Distributed planning and O(1) RPC calls remove the current barriers to finer-grained partitioning.</li>
-<li><strong>Safe file-level operations</strong>. By supporting atomic changes, Iceberg enables new use cases, like safely compacting small files and safely appending late data to tables.</li>
+<li><a href="evolution#schema-evolution">Schema evolution</a> supports add, drop, update, or rename, and has <a href="evolution#correctness">no side-effects</a></li>
+<li><a href="partitioning">Hidden partitioning</a> prevents user mistakes that cause silently incorrect results or extremely slow queries</li>
+<li><a href="evolution#partition-evolution">Partition layout evolution</a> can update the layout of a table as data volume or query patterns change</li>
+<li><a href="spark#time-travel">Time travel</a> enables reproducible queries that use exactly the same table snapshot, or lets users easily examine changes</li>
+<li>Version rollback allows users to quickly correct problems by resetting tables to a good state</li>
 </ul>
-<h3 id="why-a-new-table-format">Why a new table format?</h3>
-<p>The central metastore can be a scale bottleneck and the file system doesn&rsquo;t&mdash;and shouldn&rsquo;t&mdash;provide transactions to isolate concurrent reads and writes.</p>
-<p>There are several problems with the current format:</p>
+<h3 id="reliability-and-performance">Reliability and performance<a class="headerlink" href="#reliability-and-performance" title="Permanent link">&para;</a></h3>
+<p>Iceberg was built for huge tables. Iceberg is used in production where a single table can contain tens of petabytes of data and even these huge tables can be read without a distributed SQL engine.</p>
 <ul>
-<li><strong>There is no specification</strong>: Implementations don’t handle all cases consistently. For example, bucketing in Hive and Spark use different hash functions and are not compatible. Hive uses a locking scheme to make cross-partition changes safe, but no other implementations use it.</li>
-<li><strong>Table data is tracked in two stores</strong>: a central metastore, for partitions, and the file system, for files. This makes atomic changes to a table’s contents impossible. It also requires job planning to make listing calls that are O(n) with the number of partitions. These listing calls are expensive, especially when using a remote object store.</li>
-<li><strong>Operations depend on file rename</strong>: Most output committers depend on rename operations to implement guarantees and reduce the amount of time tables only have partial data from a write. But rename is not a metadata-only operation in S3 and will copy data. The <a href="https://issues.apache.org/jira/browse/HADOOP-13786">new S3 committers</a> that use multipart upload make this better, but can’t entirely solve the problem and put a lot of load on the file system during job commit.</li>
+<li><a href="performance#scan-planning">Scan planning is fast</a> &ndash; a distributed SQL engine isn&rsquo;t needed to read a table or find files</li>
+<li><a href="performance#data-filtering">Advanced filtering</a> &ndash; data files are pruned with partition and column-level stats, using table metadata</li>
 </ul>
-<p>The current format&rsquo;s dependence on listing and rename cannot be changed, so a new format is needed.</p>
-<h3 id="other-design-goals">Other design goals</h3>
-<p>In addition to changes in how table contents are tracked, Iceberg&rsquo;s design improves a few other areas:</p>
+<p>Iceberg was designed to solve correctness problems in eventually-consistent cloud object stores.</p>
 <ul>
-<li><strong>Reliable types</strong>: Iceberg provides a core set of types, tested to work consistently across all of the supported data formats. Types include date, timestamp, and decimal, as well as nested combinations of map, list, and struct.</li>
-<li><strong>Schema evolution</strong>: Columns are tracked by ID to fully support add, drop, and rename across all columns and nested fields.</li>
-<li><strong>Hidden partitioning</strong>: Partitioning is built into Iceberg as table configuration; it can plan efficient queries without extra partition predicates.</li>
-<li><strong>Stats-based split filtering</strong>: Stats for the columns in each data file are used to eliminate splits before creating tasks, boosting performance for highly selective queries.</li>
-<li><strong>Metrics</strong>: The format includes cost-based optimization metrics stored with data files for better job planning.</li>
-<li><strong>Unmodified partition data</strong>: The Hive layout stores partition data escaped in strings. Iceberg stores partition data without modification.</li>
-<li><strong>Portable spec</strong>: Tables are not tied to Java. Iceberg has a clear specification for other implementations.</li>
-</ul></div>
+<li><a href="reliability">Works with any cloud store</a> and reduces NN congestion when in HDFS, by avoiding listing and renames</li>
+<li><a href="reliability">Serializable isolation</a> &ndash; table changes are atomic and readers never see partial or uncommitted changes</li>
+<li><a href="reliability#concurrent-write-operations">Multiple concurrent writers</a> use optimistic concurrency and will retry to ensure that compatible updates succeed, even when writes conflict</li>
+</ul>
+<h3 id="open-standard">Open standard<a class="headerlink" href="#open-standard" title="Permanent link">&para;</a></h3>
+<p>Iceberg has been designed and developed to be an open community standard with a <a href="spec">specification</a> to ensure compatibility across languages and implementations.</p>
+<p><a href="community">Apache Iceberg is open source</a>, and is an incubating project at the <a href="https://www.apache.org/">Apache Software Foundation</a>.</p></div>
         
         
     </div>
@@ -223,32 +321,8 @@
     <script>var base_url = "."</script>
     
     <script src="js/base.js"></script>
-    <script src="search/main.js"></script>
 
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -294,5 +368,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-06-23 20:17:57
+Build Date UTC : 2019-07-06 20:08:06
 -->

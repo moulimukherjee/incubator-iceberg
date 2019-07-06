@@ -31,3 +31,32 @@
 .floating {
   float: right;
 }
+
+.headerlink {
+  padding-left: 1em;
+  opacity: 0;
+}
+
+h2:target .headerlink {
+  color: #008cba;
+  opacity: 1;
+}
+
+h3:target .headerlink {
+  color: #008cba;
+  opacity: 1;
+}
+
+h4:target .headerlink {
+  color: #008cba;
+  opacity: 1;
+}
+
+h5:target .headerlink {
+  color: #008cba;
+  opacity: 1;
+}
+
+code {
+  color: #458;
+}

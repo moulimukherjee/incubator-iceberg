@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A table format for large, slow-moving tabular data">
+    
+    
+    <link rel="../img/favicon.ico">
+
+    
+    <title>Quickstart - Apache Iceberg (incubating)</title>
+    
+
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+    <link href="../css/highlight.min.css" rel="stylesheet">
+    <link href="../css/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Apache Iceberg (incubating)</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">About</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../community/">Community</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User docs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../schemas/">Schemas</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../partitioning/">Partitioning</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../configuration/">Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../performance/">Performance</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../reliability/">Reliability</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../evolution/">Table evolution</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spark#time-travel">Time travel</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="./">Quickstart</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spark/">Spark</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../presto/">Presto</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="https://github.com/apache/incubator-iceberg">Git Repo</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Quickstart</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../api/">API intro</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="/javadoc/">Javadoc</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="https://github.com/apache/incubator-iceberg/tree/master/python">Git Repo</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Format <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../terms/">Definitions</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spec/">Spec</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="https://github.com/apache/incubator-iceberg">Iceberg on GitHub</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a rel="prev" href="../presto/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../api/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#api-quickstart">API Quickstart</a></li>
+            <li class="second-level"><a href="#create-a-table">Create a table</a></li>
+                
+                <li class="third-level"><a href="#using-a-hive-catalog">Using a Hive catalog</a></li>
+                <li class="third-level"><a href="#using-hadoop-tables">Using Hadoop tables</a></li>
+                <li class="third-level"><a href="#tables-in-spark">Tables in Spark</a></li>
+            <li class="second-level"><a href="#schemas">Schemas</a></li>
+                
+                <li class="third-level"><a href="#create-a-schema">Create a schema</a></li>
+                <li class="third-level"><a href="#convert-a-schema-from-avro">Convert a schema from Avro</a></li>
+                <li class="third-level"><a href="#convert-a-schema-from-spark">Convert a schema from Spark</a></li>
+            <li class="second-level"><a href="#partitioning">Partitioning</a></li>
+                
+                <li class="third-level"><a href="#create-a-partition-spec">Create a partition spec</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="api-quickstart">API Quickstart<a class="headerlink" href="#api-quickstart" title="Permanent link">&para;</a></h1>
+<h2 id="create-a-table">Create a table<a class="headerlink" href="#create-a-table" title="Permanent link">&para;</a></h2>
+<p>Tables are created using either a <a href="/javadoc/master/index.html?org/apache/iceberg/catalog/Catalog.html"><code>Catalog</code></a> or an implementation of the <a href="/javadoc/master/index.html?org/apache/iceberg/Tables.html"><code>Tables</code></a> interface.</p>
+<h3 id="using-a-hive-catalog">Using a Hive catalog<a class="headerlink" href="#using-a-hive-catalog" title="Permanent link">&para;</a></h3>
+<p>The Hive catalog connects to a Hive MetaStore to keep track of Iceberg tables. This example uses Spark&rsquo;s Hadoop configuration to get a Hive catalog:</p>
+<pre><code class="scala">import org.apache.iceberg.hive.HiveCatalog
+
+val catalog = new HiveCatalog(spark.sparkContext.hadoopConfiguration)
+</code></pre>
+
+<p>The <code>Catalog</code> interface defines methods for working with tables, like <code>createTable</code>, <code>loadTable</code>, <code>renameTable</code>, and <code>dropTable</code>.</p>
+<p>To create a table, pass an <code>Identifier</code> and a <code>Schema</code> along with other initial metadata:</p>
+<pre><code class="scala">val name = TableIdentifier.of(&quot;logging&quot;, &quot;logs&quot;)
+val table = catalog.createTable(name, schema, spec)
+
+// write into the new logs table with Spark 2.4
+logsDF.write
+    .format(&quot;iceberg&quot;)
+    .save(&quot;logging.logs&quot;)
+</code></pre>
+
+<p>The logs <a href="#create-a-schema">schema</a> and <a href="#create-a-partition-spec">partition spec</a> are created below.</p>
+<h3 id="using-hadoop-tables">Using Hadoop tables<a class="headerlink" href="#using-hadoop-tables" title="Permanent link">&para;</a></h3>
+<p>Iceberg also supports tables that are stored in a directory in HDFS or the local file system. Directory tables don&rsquo;t support all catalog operations, like rename, so they use the <code>Tables</code> interface instead of <code>Catalog</code>.</p>
+<p>To create a table in HDFS, use <code>HadoopTables</code>:</p>
+<pre><code class="scala">import org.apache.iceberg.hadoop.HadoopTables
+
+val tables = new HadoopTables(conf)
+
+val table = tables.create(schema, spec, &quot;hdfs:/tables/logging/logs&quot;)
+
+// write into the new logs table with Spark 2.4
+logsDF.write
+    .format(&quot;iceberg&quot;)
+    .save(&quot;hdfs:/tables/logging/logs&quot;)
+</code></pre>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Hadoop tables shouldn&rsquo;t be used with file systems that do not support atomic rename. Iceberg relies on rename to synchronize concurrent commits for directory tables.</p>
+</div>
+<h3 id="tables-in-spark">Tables in Spark<a class="headerlink" href="#tables-in-spark" title="Permanent link">&para;</a></h3>
+<p>Spark uses both <code>HiveCatalog</code> and <code>HadoopTables</code> to load tables. Hive is used when the identifier passed to <code>load</code> or <code>save</code> is not a path, otherwise Spark assumes it is a path-based table.</p>
+<p>To read and write to tables from Spark see:</p>
+<ul>
+<li><a href="../spark#reading-an-iceberg-table">Reading a table in Spark</a></li>
+<li><a href="../spark#appending-data">Appending to a table in Spark</a></li>
+<li><a href="../spark#overwriting-data">Overwriting data in a table in Spark</a></li>
+</ul>
+<h2 id="schemas">Schemas<a class="headerlink" href="#schemas" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-schema">Create a schema<a class="headerlink" href="#create-a-schema" title="Permanent link">&para;</a></h3>
+<p>This example creates a schema for a <code>logs</code> table:</p>
+<pre><code class="scala">import org.apache.iceberg.Schema
+import org.apache.iceberg.types.Types._
+
+val schema = new Schema(
+    NestedField.required(1, &quot;level&quot;, StringType.get()),
+    NestedField.required(2, &quot;event_time&quot;, TimestampType.withZone()),
+    NestedField.required(3, &quot;message&quot;, StringType.get()),
+    NestedField.optional(4, &quot;call_stack&quot;, ListType.ofRequired(5, StringType.get()))
+  )
+</code></pre>
+
+<p>When using the Iceberg API directly, type IDs are required. Conversions from other schema formats, like Spark, Avro, and Parquet will automatically assign new IDs.</p>
+<p>When a table is created, all IDs in the schema are re-assigned to ensure uniqueness.</p>
+<h3 id="convert-a-schema-from-avro">Convert a schema from Avro<a class="headerlink" href="#convert-a-schema-from-avro" title="Permanent link">&para;</a></h3>
+<p>To create an Iceberg schema from an existing Avro schema, use converters in <code>AvroSchemaUtil</code>:</p>
+<pre><code class="scala">import org.apache.iceberg.avro.AvroSchemaUtil
+import org.apache.avro.Schema.Parser
+
+val avroSchema = new Parser().parse(
+    &quot;&quot;&quot;{ &quot;type&quot;: &quot;record&quot;, &quot;name&quot;: &quot;com.example.AvroType&quot;,
+      |  &quot;fields&quot;: [ ... ]
+      |}&quot;&quot;&quot;.stripMargin
+
+val schema = AvroSchemaUtil.convert(avroSchema)
+</code></pre>
+
+<h3 id="convert-a-schema-from-spark">Convert a schema from Spark<a class="headerlink" href="#convert-a-schema-from-spark" title="Permanent link">&para;</a></h3>
+<p>To create an Iceberg schema from an existing table, use converters in <code>SparkSchemaUtil</code>:</p>
+<pre><code class="scala">import org.apache.iceberg.spark.SparkSchemaUtil
+
+val schema = SparkSchemaUtil.convert(spark.table(&quot;db.table&quot;).schema)
+</code></pre>
+
+<h2 id="partitioning">Partitioning<a class="headerlink" href="#partitioning" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-partition-spec">Create a partition spec<a class="headerlink" href="#create-a-partition-spec" title="Permanent link">&para;</a></h3>
+<p>Partition specs describe how Iceberg should group records into data files. Partition specs are created for a table&rsquo;s schema using a builder.</p>
+<p>This example creates a partition spec for the <code>logs</code> table that partitions records by the hour of the log event&rsquo;s timestamp and by log level:</p>
+<pre><code class="scala">import org.apache.iceberg.PartitionSpec
+
+val spec = PartitionSpec.builderFor(schema)
+                        .hour(&quot;event_time&quot;)
+                        .identity(&quot;level&quot;)
+                        .build()
+</code></pre></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>var base_url = ".."</script>
+    
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

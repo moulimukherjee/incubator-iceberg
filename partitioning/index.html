@@ -84,8 +84,14 @@
                 
                 
                     <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User docs <b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../schemas/">Schemas</a>
+</li>
+
                         
                             
 <li class="active">
@@ -95,7 +101,112 @@
                         
                             
 <li >
+    <a href="../configuration/">Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../performance/">Performance</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../reliability/">Reliability</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../evolution/">Table evolution</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spark#time-travel">Time travel</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../api-quickstart/">Quickstart</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spark/">Spark</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../presto/">Presto</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="https://github.com/apache/incubator-iceberg">Git Repo</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../api-quickstart/">Quickstart</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../api/">API intro</a>
+</li>
+
+                        
+                            
+<li >
     <a href="/javadoc/">Javadoc</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="https://github.com/apache/incubator-iceberg/tree/master/python">Git Repo</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Format <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../terms/">Definitions</a>
 </li>
 
                         
@@ -109,21 +220,22 @@
                     </li>
                 
                 
+                
+                    <li >
+                        <a href="https://github.com/apache/incubator-iceberg">Iceberg on GitHub</a>
+                    </li>
+                
+                
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                            <i class="fas fa-search"></i> Search
-                        </a>
-                    </li>
                     <li >
-                        <a rel="prev" href="../community/">
+                        <a rel="prev" href="../schemas/">
                             <i class="fas fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="next" href="../spec/">
+                        <a rel="next" href="../configuration/">
                             Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
@@ -149,7 +261,7 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h2 id="what-is-partitioning">What is partitioning?</h2>
+<h2 id="what-is-partitioning">What is partitioning?<a class="headerlink" href="#what-is-partitioning" title="Permanent link">&para;</a></h2>
 <p>Partitioning is a way to make queries faster by grouping similar rows together when writing.</p>
 <p>For example, queries for log entries from a <code>logs</code> table would usually include a time range, like this query for logs between 10 and 12 AM:</p>
 <pre><code class="sql">SELECT level, message FROM logs
@@ -158,14 +270,14 @@ WHERE event_time BETWEEN '2018-12-01 10:00:00' AND '2018-12-01 12:00:00'
 
 <p>Configuring the <code>logs</code> table to partition by the date of <code>event_time</code> will group log events into files with the same event date. Iceberg keeps track of that date and will use it to skip files for other dates that don&rsquo;t have useful data.</p>
 <p>Iceberg can partition timestamps by year, month, day, and hour granularity. It can also use a categorical column, like <code>level</code> in this logs example, to store rows together and speed up queries.</p>
-<h2 id="what-does-iceberg-do-differently">What does Iceberg do differently?</h2>
+<h2 id="what-does-iceberg-do-differently">What does Iceberg do differently?<a class="headerlink" href="#what-does-iceberg-do-differently" title="Permanent link">&para;</a></h2>
 <p>Other tables formats like Hive support partitioning, but Iceberg supports <em>hidden partitioning</em>.</p>
 <ul>
 <li>Iceberg handles the tedious and error-prone task of producing partition values for rows in a table.</li>
 <li>Iceberg avoids reading unnecessary partitions automatically. Consumers don&rsquo;t need to know how the table is partitioned and add extra filters to their queries.</li>
 <li>Iceberg partition layouts can evolve as needed.</li>
 </ul>
-<h3 id="partitioning-in-hive">Partitioning in Hive</h3>
+<h3 id="partitioning-in-hive">Partitioning in Hive<a class="headerlink" href="#partitioning-in-hive" title="Permanent link">&para;</a></h3>
 <p>To demonstrate the difference, consider how Hive would handle a <code>logs</code> table.</p>
 <p>In Hive, partitions are explicit and appear as a column, so the <code>logs</code> table would have a column called <code>event_date</code>. When writing, an insert needs to supply the data for the <code>event_date</code> column:</p>
 <pre><code class="sql">INSERT INTO logs PARTITION (event_date)
@@ -180,7 +292,7 @@ WHERE event_time BETWEEN '2018-12-01 10:00:00' AND '2018-12-01 12:00:00'
 </code></pre>
 
 <p>If the <code>event_date</code> filter were missing, Hive would scan through every file in the table because it doesn&rsquo;t know that the <code>event_time</code> column is related to the <code>event_date</code> column.</p>
-<h3 id="problems-with-hive-partitioning">Problems with Hive partitioning</h3>
+<h3 id="problems-with-hive-partitioning">Problems with Hive partitioning<a class="headerlink" href="#problems-with-hive-partitioning" title="Permanent link">&para;</a></h3>
 <p>Hive must be given partition values. In the logs example, it doesn&rsquo;t know the relationship bewteen <code>event_time</code> and <code>event_date</code>.</p>
 <p>This leads to several problems:</p>
 <ul>
@@ -196,7 +308,7 @@ WHERE event_time BETWEEN '2018-12-01 10:00:00' AND '2018-12-01 12:00:00'
 </li>
 <li>Working queries are tied to the table&rsquo;s partitioning scheme, so partitioning configuration cannot be changed without breaking queries</li>
 </ul>
-<h3 id="icebergs-hidden-partitioning">Iceberg&rsquo;s hidden partitioning</h3>
+<h3 id="icebergs-hidden-partitioning">Iceberg&rsquo;s hidden partitioning<a class="headerlink" href="#icebergs-hidden-partitioning" title="Permanent link">&para;</a></h3>
 <p>Iceberg produces partition values by taking a column value and optionally transforming it. Iceberg is responsible for converting <code>event_time</code> into <code>event_date</code>, and keeps track of the relationship.</p>
 <p>Table partitioning is configured using these relationships. The <code>logs</code> table would be partitioned by <code>date(event_time)</code> and <code>level</code>.</p>
 <p>Because Iceberg doesn&rsquo;t require user-maintained partition columns, it can hide partitioning. Partition values are produced correctly every time and always used to speed up queries, when possible. Producers and consumers wouldn&rsquo;t even see <code>event_date</code>.</p>
@@ -221,32 +333,8 @@ WHERE event_time BETWEEN '2018-12-01 10:00:00' AND '2018-12-01 12:00:00'
     <script>var base_url = ".."</script>
     
     <script src="../js/base.js"></script>
-    <script src="../search/main.js"></script>
 
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
