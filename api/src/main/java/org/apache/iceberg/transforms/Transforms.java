@@ -20,6 +20,7 @@
 package org.apache.iceberg.transforms;
 
 import com.google.common.base.Preconditions;
+
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -59,6 +60,8 @@ public class Transforms {
       return Timestamps.valueOf(transform.toUpperCase(Locale.ENGLISH));
     } else if (type.typeId() == Type.TypeID.DATE) {
       return Dates.valueOf(transform.toUpperCase(Locale.ENGLISH));
+    } else if (transform.equalsIgnoreCase("day") && type.typeId() == Type.TypeID.DOUBLE) {
+      return new DoubleTimestamp();
     }
 
     throw new IllegalArgumentException("Unknown transform: " + transform);
@@ -129,6 +132,8 @@ public class Transforms {
         return (Transform<T, Integer>) Dates.DAY;
       case TIMESTAMP:
         return (Transform<T, Integer>) Timestamps.DAY;
+      case DOUBLE:
+        return (Transform<T, Integer>) new DoubleTimestamp();
       default:
         throw new IllegalArgumentException(
             "Cannot partition type " + type + " by month");

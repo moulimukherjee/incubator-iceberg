@@ -73,6 +73,27 @@ class ProjectionUtil {
     }
   }
 
+  static <T> UnboundPredicate<T> truncateDouble(
+      String name, BoundPredicate<Double> pred, Transform<Double, T> transform) {
+    double boundary = pred.literal().value();
+    switch (pred.op()) {
+      case LT:
+        // adjust closed and then transform ltEq
+        return predicate(Expression.Operation.LT_EQ, name, transform.apply(boundary - 1d));
+      case LT_EQ:
+        return predicate(Expression.Operation.LT_EQ, name, transform.apply(boundary));
+      case GT:
+        // adjust closed and then transform gtEq
+        return predicate(Expression.Operation.GT_EQ, name, transform.apply(boundary + 1d));
+      case GT_EQ:
+        return predicate(Expression.Operation.GT_EQ, name, transform.apply(boundary));
+      case EQ:
+        return predicate(pred.op(), name, transform.apply(boundary));
+      default:
+        return null;
+    }
+  }
+
   static <T> UnboundPredicate<T> truncateDecimal(
       String name, BoundPredicate<BigDecimal> pred,
       Transform<BigDecimal, T> transform) {

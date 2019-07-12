@@ -48,6 +48,17 @@ public class TestTimestamps {
   }
 
   @Test
+  public void testTimestampWithoutZoneToHumanStringDouhle() {
+    Types.DoubleType type = Types.DoubleType.get();
+    Literal<Double> date = Literal.of(1.498032372679853E9).to(type);
+
+    Transform<Double, Integer> day = Transforms.day(type);
+    Assert.assertEquals("Should produce the correct Human string",
+      "2017-06-21", day.toHumanString(day.apply(date.value())));
+
+  }
+
+  @Test
   public void testTimestampWithZoneToHumanString() {
     Types.TimestampType type = Types.TimestampType.withZone();
     Literal<Long> date = Literal.of("2017-12-01T10:12:55.038194-08:00").to(type);
